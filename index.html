@@ -612,6 +612,132 @@ canvas#iso-c { display: block; image-rendering: pixelated; image-rendering: cris
 .iso-win-title { font-size: clamp(0.75rem, 3vw, 1.1rem); color: #f8e860; text-shadow: 4px 4px 0 #b8880a; margin-bottom: 0.8rem; }
 .iso-win-sub { font-size: clamp(0.38rem, 1.3vw, 0.52rem); color: #aaaacc; margin-bottom: 1.5rem; }
 
+/* ═══════════════════════════════════════════════════════════
+   GREEK 32-BIT SCREEN
+═══════════════════════════════════════════════════════════ */
+#screen-greek {
+  min-height: 100vh;
+  background: #1a120a;
+  background-image:
+    radial-gradient(ellipse at 40% 10%, #2e1e08 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 90%, #0a1818 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 40%, #1a0e04 0%, transparent 40%);
+  font-family: 'Cinzel', serif;
+}
+
+.gk-header { text-align: center; padding: 1.2rem 1rem 0.3rem; width: 100%; }
+
+.gk-header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+  font-weight: 700;
+  color: #f0e8d0;
+  letter-spacing: 0.2em;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 0 30px rgba(106,171,154,0.3);
+}
+
+.gk-header h1::after {
+  content: '';
+  display: block;
+  width: 55%;
+  height: 1px;
+  margin: 0.4rem auto 0;
+  background: linear-gradient(90deg, transparent, #6aab9a, transparent);
+}
+
+.gk-back-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: #4a7a6a;
+  background: none; border: none; cursor: pointer;
+  padding: 0.3rem 0; margin-top: 0.2rem;
+  transition: color 0.2s;
+  display: block; margin-left: auto; margin-right: auto;
+}
+.gk-back-btn:hover { color: #8fcfbf; }
+
+.gk-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.8rem; padding: 0.3rem 0.8rem 1.5rem;
+  width: 100%; max-width: 860px;
+}
+
+.gk-status-bar { display: flex; align-items: stretch; gap: 0.6rem; width: 100%; }
+
+.gk-player-panel {
+  flex: 1;
+  background: linear-gradient(135deg, #1e1608, #150f04);
+  border: 2px solid #3a3020;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  position: relative;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.gk-player-panel.active-p1 { border-color:#c04030; box-shadow:0 0 18px rgba(192,64,48,0.35); }
+.gk-player-panel.active-p2 { border-color:#3060c0; box-shadow:0 0 18px rgba(48,96,192,0.35); }
+
+.gk-player-label { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; color:#7a6a48; margin-bottom:0.25rem; }
+.gk-player-panel.active-p1 .gk-player-label { color:#e07060; }
+.gk-player-panel.active-p2 .gk-player-label { color:#6090e0; }
+
+.gk-pips { display:flex; gap:5px; margin-top:0.2rem; }
+.gk-pip { width:10px; height:10px; border-radius:50%; border:2px solid currentColor; transition:all 0.2s; }
+.gk-pip.filled { background:currentColor; }
+.gk-pip.p1c { color:#c04030; }
+.gk-pip.p2c { color:#3060c0; }
+
+.gk-phase-box {
+  flex: 1.4;
+  background: linear-gradient(135deg, #1e1608, #150f04);
+  border: 2px solid #3a3020;
+  border-radius: 6px;
+  padding: 0.5rem;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+
+.gk-phase-main { font-family:'Cinzel',serif; font-size:clamp(0.5rem,1.3vw,0.7rem); color:#d4b870; letter-spacing:0.12em; }
+.gk-phase-hint { font-family:'Crimson Text',serif; font-size:clamp(0.7rem,1.6vw,0.9rem); color:#7a6a48; margin-top:0.25rem; font-style:italic; }
+
+.gk-canvas-wrap { position:relative; cursor:crosshair; }
+canvas#gk-c { display:block; }
+
+.gk-controls { display:flex; gap:0.7rem; }
+
+.gk-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  padding: 0.55rem 1.2rem;
+  background: linear-gradient(135deg, #1e1608, #150f04);
+  border: 2px solid #3a3020;
+  border-radius: 4px;
+  color: #7a6a48;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.gk-btn:hover { border-color:#6aab9a; color:#8fcfbf; box-shadow:0 0 12px rgba(106,171,154,0.2); }
+.gk-btn-primary { border-color:#d4b870; color:#d4b870; }
+.gk-btn-primary:hover { border-color:#f0d890; color:#f0d890; box-shadow:0 0 12px rgba(212,184,112,0.3); }
+
+.gk-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:100; align-items:center; justify-content:center; backdrop-filter:blur(6px); }
+.gk-overlay.show { display:flex; }
+
+.gk-win-card {
+  background: linear-gradient(145deg, #2a1e08, #1a1004);
+  border: 2px solid #d4b870;
+  border-radius: 12px;
+  padding: 2.5rem 3.5rem;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(212,184,112,0.25), 0 30px 60px rgba(0,0,0,0.8);
+  animation: gk-pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+@keyframes gk-pop { from{transform:scale(0.7) translateY(20px);opacity:0} to{transform:scale(1);opacity:1} }
+.gk-win-title { font-family:'Cinzel',serif; font-size:clamp(1.4rem,5vw,2.4rem); color:#d4b870; text-shadow:0 0 30px rgba(212,184,112,0.5); margin-bottom:0.5rem; letter-spacing:0.2em; }
+.gk-win-sub { font-family:'Crimson Text',serif; font-size:clamp(0.9rem,2vw,1.2rem); color:#c0b090; font-style:italic; margin-bottom:2rem; }
+
 /* ── Transition animations ── */
 .screen { animation: none; }
 .screen.entering { animation: fade-in 0.35s ease forwards; }
@@ -646,6 +772,14 @@ canvas#iso-c { display: block; image-rendering: pixelated; image-rendering: cris
         <div class="card-tag">16-BIT ISO</div>
         <p class="card-desc">An isometric canvas-rendered world with hand-drawn pixel art buildings, workers, and domes.</p>
         <span class="card-cta">▸ Play Pixel</span>
+      </div>
+
+      <div class="mode-card" onclick="startGame('greek')" style="border-color:#4a7c6e;">
+        <span class="card-icon">⚱️</span>
+        <div class="card-title">GREEK EDITION</div>
+        <div class="card-tag" style="border-color:#6aab9a;color:#6aab9a;">32-BIT ISO</div>
+        <p class="card-desc">Rich isometric Greek villas with marble columns, stone walls, and brilliant blue rooftops. Workers are classical marble statues of ancient builders.</p>
+        <span class="card-cta" style="color:#6aab9a;">▸ Play Greek</span>
       </div>
     </div>
 
@@ -774,6 +908,55 @@ canvas#iso-c { display: block; image-rendering: pixelated; image-rendering: cris
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════
+     GREEK 32-BIT GAME SCREEN
+═══════════════════════════════════════════════════════════ -->
+<div id="screen-greek" class="screen">
+  <div class="gk-header">
+    <h1>SANTORINI</h1>
+    <button class="gk-back-btn" onclick="goMenu('greek')">← Back to Menu</button>
+  </div>
+  <div class="gk-wrap">
+    <div class="gk-status-bar">
+      <div class="gk-player-panel" id="gk-panel-p1">
+        <div class="gk-player-label">PLAYER I</div>
+        <div class="gk-pips">
+          <div class="gk-pip p1c" id="gk-pip-p1-0"></div>
+          <div class="gk-pip p1c" id="gk-pip-p1-1"></div>
+        </div>
+      </div>
+      <div class="gk-phase-box">
+        <div class="gk-phase-main" id="gk-phase-main">PLACE WORKERS</div>
+        <div class="gk-phase-hint" id="gk-phase-hint">Player I — click a tile</div>
+      </div>
+      <div class="gk-player-panel" id="gk-panel-p2">
+        <div class="gk-player-label">PLAYER II</div>
+        <div class="gk-pips">
+          <div class="gk-pip p2c" id="gk-pip-p2-0"></div>
+          <div class="gk-pip p2c" id="gk-pip-p2-1"></div>
+        </div>
+      </div>
+    </div>
+    <div class="gk-canvas-wrap">
+      <canvas id="gk-c"></canvas>
+    </div>
+    <div class="gk-controls">
+      <button class="gk-btn gk-btn-primary" onclick="gkNewGame()">NEW GAME</button>
+      <button class="gk-btn" id="gk-btn-cancel" onclick="gkCancelSel()" style="display:none">CANCEL</button>
+    </div>
+  </div>
+</div>
+
+<div class="gk-overlay" id="gk-win-overlay">
+  <div class="gk-win-card">
+    <div class="gk-win-title" id="gk-win-title">VICTORY</div>
+    <div class="gk-win-sub" id="gk-win-sub">Player I has ascended!</div>
+    <button class="gk-btn gk-btn-primary" style="margin-top:1rem" onclick="gkNewGame()">PLAY AGAIN</button>
+    <br>
+    <button class="gk-btn" style="margin-top:0.6rem" onclick="goMenu('greek')">BACK TO MENU</button>
+  </div>
+</div>
+
 <script>
 'use strict';
 // ═══════════════════════════════════════════════════════════
@@ -796,19 +979,26 @@ function startGame(mode) {
   if (mode === 'marble') {
     showScreen('marble');
     mNewGame();
-  } else {
+  } else if (mode === 'iso') {
     showScreen('iso');
     isoInit();
     isoNewGame();
+  } else if (mode === 'greek') {
+    showScreen('greek');
+    gkInit();
+    gkNewGame();
   }
 }
 
 function goMenu(from) {
   if (from === 'marble') {
     document.getElementById('m-win-overlay').classList.remove('show');
-  } else {
+  } else if (from === 'iso') {
     document.getElementById('iso-win-overlay').classList.remove('show');
     if (isoAnimFrame) { cancelAnimationFrame(isoAnimFrame); isoAnimFrame = null; }
+  } else if (from === 'greek') {
+    document.getElementById('gk-win-overlay').classList.remove('show');
+    if (gkAnimFrame) { cancelAnimationFrame(gkAnimFrame); gkAnimFrame = null; }
   }
   showScreen('menu');
 }
@@ -1342,6 +1532,965 @@ function isoUpdateUI() {
   document.getElementById('iso-phase-main').textContent = phases[IS.phase][0];
   document.getElementById('iso-phase-hint').textContent = phases[IS.phase][1];
   document.getElementById('iso-btn-cancel').style.display = IS.phase === 'move' ? 'inline-block' : 'none';
+}
+
+// ═══════════════════════════════════════════════════════════
+//  GREEK 32-BIT ISOMETRIC ENGINE
+// ═══════════════════════════════════════════════════════════
+let GS = makeState();
+let gkCtx, gkLogW, gkLogH;
+let gkAnimFrame = null;
+let gkFlashT = 0;
+
+// Geometry — larger tiles for richer art
+const GK_TW = 56;   // half-tile width
+const GK_TH = 28;   // half-tile height
+const GK_LEVEL_H = 22; // height per building level
+const GRID5 = 5;
+
+function gkCellElev(cell) { return cell.level * GK_LEVEL_H; }
+
+function gkToScreen(gr, gc, elev) {
+  const ox = gkLogW / 2;
+  const oy = 60;
+  return { x: ox + (gc - gr) * GK_TW, y: oy + (gc + gr) * GK_TH - elev };
+}
+
+function gkPaintOrder() {
+  const order = [];
+  for (let sum = 0; sum < GRID5*2-1; sum++)
+    for (let r = 0; r <= sum; r++) {
+      const c = sum - r;
+      if (r < GRID5 && c < GRID5) order.push([r, c]);
+    }
+  return order;
+}
+
+function gkScreenToCell(mx, my) {
+  const order = gkPaintOrder();
+  for (let i = order.length-1; i >= 0; i--) {
+    const [gr, gc] = order[i];
+    const cell = GS.board[gr][gc];
+    const elev = gkCellElev(cell);
+    const { x, y } = gkToScreen(gr, gc, elev);
+    const dx = mx - x, dy = my - (y + GK_TH);
+    if (Math.abs(dx/GK_TW) + Math.abs(dy/GK_TH) <= 1.08) return [gr, gc];
+    if (elev > 0) {
+      const wallTop = y + GK_TH*2;
+      if (my > wallTop && my < wallTop + elev + GK_TH && mx > x-GK_TW && mx < x+GK_TW) return [gr, gc];
+    }
+  }
+  return null;
+}
+
+// ── Colour palette (Mediterranean / Greek) ──────────────────
+const GKC = {
+  // Ground tile — warm sandy limestone
+  gnd_top_hi:  '#e8d8a8', gnd_top_mid: '#d4c090', gnd_top_lo: '#b8a870',
+  gnd_left:    '#8a7848', gnd_right:   '#a08c58',
+  gnd_detail:  '#c8b478',
+
+  // Level 1 — rough stone walls
+  l1_top_hi: '#ddd0b0', l1_top_mid: '#ccc098', l1_top_lo: '#b8ae88',
+  l1_left:   '#907860', l1_right:   '#a08870',
+  l1_col_hi: '#e8e0d0', l1_col_sh:  '#c0b8a0',
+
+  // Level 2 — finer dressed marble
+  l2_top_hi: '#f0ece0', l2_top_mid: '#e0d8c8', l2_top_lo: '#ccc8b8',
+  l2_left:   '#b0a888', l2_right:   '#c0b898',
+  l2_col_hi: '#f8f4ec', l2_col_sh:  '#d8d0c0',
+
+  // Level 3 — white marble
+  l3_top_hi: '#ffffff', l3_top_mid: '#f4f0e8', l3_top_lo: '#e4e0d8',
+  l3_left:   '#c8c4b8', l3_right:   '#d8d4c8',
+  l3_col_hi: '#ffffff', l3_col_sh:  '#e0dcd0',
+
+  // Dome / Cycladic blue roof
+  dome_hi:   '#a8e0f8', dome_mid:   '#5ab0e0', dome_dark: '#2068b0',
+  dome_deep: '#0a3870', dome_rim:   '#3890c8',
+
+  // Sky accent
+  sky:       '#c8e8f8',
+
+  // Player 1 statue — terracotta / red
+  p1_marble: '#e8c0a0', p1_shadow: '#b88060', p1_dark: '#906040',
+  p1_tunic:  '#c84030', p1_tsh:    '#902010', p1_trim: '#f0b040',
+
+  // Player 2 statue — cool blue-grey
+  p2_marble: '#c0c8d8', p2_shadow: '#8090a8', p2_dark: '#506070',
+  p2_tunic:  '#2858b8', p2_tsh:    '#183888', p2_trim: '#80c0e0',
+
+  // Highlight overlays
+  hl_move:  [255, 220, 80],
+  hl_build: [80,  200, 120],
+  hl_place: [180, 130, 255],
+};
+
+// ── Helpers ──────────────────────────────────────────────────
+function gkGrad(ctx, x0,y0, x1,y1, ...stops) {
+  const g = ctx.createLinearGradient(x0,y0,x1,y1);
+  stops.forEach(([t,c]) => g.addColorStop(t,c));
+  return g;
+}
+
+function gkRadGrad(ctx, cx,cy,r0, cx2,cy2,r1, ...stops) {
+  const g = ctx.createRadialGradient(cx,cy,r0,cx2,cy2,r1);
+  stops.forEach(([t,c]) => g.addColorStop(t,c));
+  return g;
+}
+
+function gkDiamond(ctx, x, y, tw, th) {
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x+tw, y+th);
+  ctx.lineTo(x, y+th*2);
+  ctx.lineTo(x-tw, y+th);
+  ctx.closePath();
+}
+
+function gkLeftFace(ctx, x, y, h) {
+  ctx.beginPath();
+  ctx.moveTo(x-GK_TW, y+GK_TH);
+  ctx.lineTo(x,       y+GK_TH*2);
+  ctx.lineTo(x,       y+GK_TH*2+h);
+  ctx.lineTo(x-GK_TW, y+GK_TH+h);
+  ctx.closePath();
+}
+
+function gkRightFace(ctx, x, y, h) {
+  ctx.beginPath();
+  ctx.moveTo(x,       y+GK_TH*2);
+  ctx.lineTo(x+GK_TW, y+GK_TH);
+  ctx.lineTo(x+GK_TW, y+GK_TH+h);
+  ctx.lineTo(x,       y+GK_TH*2+h);
+  ctx.closePath();
+}
+
+// ── Draw ground tile ─────────────────────────────────────────
+function gkDrawGround(ctx, x, y, hl, isSel) {
+  const TW = GK_TW, TH = GK_TH;
+
+  // Top face
+  gkDiamond(ctx, x, y, TW, TH);
+  ctx.fillStyle = gkGrad(ctx, x-TW,y, x+TW,y+TH*2,
+    [0, GKC.gnd_top_hi], [0.5, GKC.gnd_top_mid], [1, GKC.gnd_top_lo]);
+  ctx.fill();
+
+  // Stone tile grid lines (flagstone pattern)
+  ctx.save();
+  ctx.clip();
+  ctx.strokeStyle = 'rgba(0,0,0,0.12)';
+  ctx.lineWidth = 0.8;
+  // Horizontal-ish lines across the diamond
+  for (let t = 0.25; t < 1; t += 0.25) {
+    const yl = y + TH*2*t;
+    const xl = x - TW*(1-Math.abs(t*2-1));
+    const xr = x + TW*(1-Math.abs(t*2-1));
+    ctx.beginPath(); ctx.moveTo(xl, yl); ctx.lineTo(xr, yl); ctx.stroke();
+  }
+  // Vertical-ish lines
+  for (let t = 0.25; t < 1; t += 0.25) {
+    ctx.beginPath();
+    ctx.moveTo(x - TW + TW*2*t, y + Math.abs(t-0.5)*TH*4);
+    ctx.lineTo(x - TW + TW*2*t, y + TH*2 - Math.abs(t-0.5)*TH*4);
+    ctx.stroke();
+  }
+  // Mortar dots / texture
+  ctx.fillStyle = GKC.gnd_detail;
+  for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) {
+    const px = x + dc*TW*0.4, py = y + TH + dr*TH*0.5;
+    ctx.beginPath(); ctx.arc(px, py, 1.5, 0, Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+
+  // Left wall
+  gkLeftFace(ctx, x, y, 6);
+  ctx.fillStyle = gkGrad(ctx, x-TW,y+TH, x,y+TH*2,
+    [0, GKC.gnd_left], [1, '#706038']);
+  ctx.fill();
+  // Right wall
+  gkRightFace(ctx, x, y, 6);
+  ctx.fillStyle = gkGrad(ctx, x,y+TH, x+TW,y+TH*2,
+    [0, GKC.gnd_right], [1, '#907848']);
+  ctx.fill();
+
+  // Top edge highlight
+  ctx.strokeStyle = GKC.gnd_top_hi;
+  ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-TW,y+TH); ctx.stroke();
+
+  // Highlight / selection overlay
+  if (hl || isSel) {
+    gkDiamond(ctx, x, y, TW, TH);
+    ctx.fillStyle = hl || 'rgba(255,255,100,0.5)';
+    ctx.fill();
+    ctx.strokeStyle = (hl||'rgba(255,255,100,0.9)').replace(/[\d.]+\)$/,'0.85)');
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
+// ── Draw a building level's wall faces ───────────────────────
+// ── Draw a building level's wall faces ───────────────────────
+function gkDrawWalls(ctx, x, y, level, faceH) {
+  const palLeft  = [GKC.l1_left,  GKC.l2_left,  GKC.l3_left];
+  const palRight = [GKC.l1_right, GKC.l2_right, GKC.l3_right];
+  const lc = palLeft[level-1]  || GKC.l3_left;
+  const rc = palRight[level-1] || GKC.l3_right;
+  const TW = GK_TW, TH = GK_TH;
+
+  // ── Left face ────────────────────────────────────────────
+  gkLeftFace(ctx, x, y, faceH);
+  ctx.fillStyle = gkGrad(ctx, x-TW, y+TH, x, y+TH*2,
+    [0, lc], [0.5, shadeHex(lc,-8)], [1, shadeHex(lc,-22)]);
+  ctx.fill();
+
+  ctx.save(); ctx.clip();
+  // Stone courses
+  ctx.strokeStyle = 'rgba(0,0,0,0.14)'; ctx.lineWidth = 0.8;
+  for (let i = 1; i <= 2; i++) {
+    const t = i / 3;
+    ctx.beginPath();
+    ctx.moveTo(x-TW, y+TH + faceH*t + TH*(1-t));
+    ctx.lineTo(x,    y+TH*2 + faceH*t);
+    ctx.stroke();
+  }
+  // Arched window on left face (levels 2+)
+  if (level >= 2) {
+    const wCx = x - TW*0.52, wCy = y + TH*1.6 + faceH*0.45;
+    const wW = TW*0.18, wH = faceH*0.32;
+    ctx.fillStyle = shadeHex(lc, -40);
+    ctx.beginPath();
+    ctx.arc(wCx, wCy - wH*0.3, wW*0.5, Math.PI, 0, false);
+    ctx.rect(wCx - wW*0.5, wCy - wH*0.3, wW, wH*0.55);
+    ctx.fill();
+    // Arch keystone
+    ctx.fillStyle = shadeHex(lc, 15);
+    ctx.fillRect(wCx - 1.5, wCy - wH*0.3 - wW*0.5, 3, 3);
+  }
+  ctx.restore();
+
+  // Left ambient-occlusion inner edge
+  ctx.strokeStyle = shadeHex(lc, 22); ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(x-TW, y+TH); ctx.lineTo(x-TW, y+TH+faceH);
+  ctx.stroke();
+
+  // ── Right face ───────────────────────────────────────────
+  gkRightFace(ctx, x, y, faceH);
+  ctx.fillStyle = gkGrad(ctx, x, y+TH, x+TW, y+TH*2,
+    [0, shadeHex(rc,14)], [0.5, rc], [1, shadeHex(rc,-18)]);
+  ctx.fill();
+
+  ctx.save(); ctx.clip();
+  ctx.strokeStyle = 'rgba(0,0,0,0.10)'; ctx.lineWidth = 0.8;
+  for (let i = 1; i <= 2; i++) {
+    const t = i / 3;
+    ctx.beginPath();
+    ctx.moveTo(x,    y+TH*2 + faceH*t);
+    ctx.lineTo(x+TW, y+TH   + faceH*t - TH*(1-t));
+    ctx.stroke();
+  }
+  // Arched window on right face (levels 2+)
+  if (level >= 2) {
+    const wCx = x + TW*0.52, wCy = y + TH*1.6 + faceH*0.45;
+    const wW = TW*0.18, wH = faceH*0.32;
+    ctx.fillStyle = shadeHex(rc, -42);
+    ctx.beginPath();
+    ctx.arc(wCx, wCy - wH*0.3, wW*0.5, Math.PI, 0, false);
+    ctx.rect(wCx - wW*0.5, wCy - wH*0.3, wW, wH*0.55);
+    ctx.fill();
+    ctx.fillStyle = shadeHex(rc, 18);
+    ctx.fillRect(wCx - 1.5, wCy - wH*0.3 - wW*0.5, 3, 3);
+  }
+  ctx.restore();
+
+  ctx.strokeStyle = shadeHex(rc, -28); ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(x+TW, y+TH); ctx.lineTo(x+TW, y+TH+faceH);
+  ctx.stroke();
+
+  // ── Top edge border ───────────────────────────────────────
+  ctx.strokeStyle = 'rgba(0,0,0,0.25)'; ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(x-TW, y+TH); ctx.lineTo(x, y+TH*2); ctx.lineTo(x+TW, y+TH);
+  ctx.stroke();
+
+  // ── Frieze band at very top for level 3 ──────────────────
+  if (level === 3) {
+    const fH = 5;
+    gkLeftFace(ctx, x, y, fH);
+    ctx.fillStyle = gkGrad(ctx, x-TW,y+TH, x,y+TH*2, [0,'#e4dcc8'],[1,'#d0c8b4']);
+    ctx.fill();
+    ctx.save(); ctx.clip();
+    ctx.fillStyle = 'rgba(0,0,0,0.18)';
+    for (let ti = 0; ti < 4; ti++) {
+      ctx.fillRect(x - TW*0.85 + ti*TW*0.22, y+TH+1, TW*0.07, fH-2);
+    }
+    ctx.restore();
+
+    gkRightFace(ctx, x, y, fH);
+    ctx.fillStyle = gkGrad(ctx, x,y+TH, x+TW,y+TH*2, [0,'#eee6d0'],[1,'#d8d0bc']);
+    ctx.fill();
+    ctx.save(); ctx.clip();
+    ctx.fillStyle = 'rgba(0,0,0,0.12)';
+    for (let ti = 0; ti < 4; ti++) {
+      ctx.fillRect(x + TW*0.1 + ti*TW*0.22, y+TH+1, TW*0.07, fH-2);
+    }
+    ctx.restore();
+  }
+}
+
+// ── Draw columns along top edge ──────────────────────────────
+function gkDrawColumns(ctx, x, y, level, colH) {
+  const colPals = [
+    [GKC.l1_col_hi, GKC.l1_col_sh],
+    [GKC.l2_col_hi, GKC.l2_col_sh],
+    [GKC.l3_col_hi, GKC.l3_col_sh],
+  ];
+  const [colHi, colSh] = colPals[level-1] || colPals[2];
+  const TW = GK_TW, TH = GK_TH;
+  const colW = 5;
+  const colCount = 3;
+  const colSpacing = TW * 0.5;
+
+  // Draw 3 columns along left-front edge and right-front edge
+  for (let side = 0; side < 2; side++) {
+    for (let i = 0; i < colCount; i++) {
+      const t = i / (colCount-1);
+      let cx, cy;
+      if (side === 0) { // left face direction
+        cx = x - TW * t * 0.85;
+        cy = y + TH * (1 + t * 0.85);
+      } else { // right face direction
+        cx = x + TW * t * 0.85;
+        cy = y + TH * (1 + t * 0.85);
+      }
+
+      // Column shaft
+      const g = ctx.createLinearGradient(cx-colW/2, cy, cx+colW/2, cy);
+      g.addColorStop(0,   colSh);
+      g.addColorStop(0.3, colHi);
+      g.addColorStop(0.7, colHi);
+      g.addColorStop(1,   colSh);
+      ctx.fillStyle = g;
+      ctx.fillRect(cx-colW/2, cy-colH, colW, colH);
+
+      // Capital (top of column)
+      ctx.fillStyle = colHi;
+      ctx.fillRect(cx-colW/2-1.5, cy-colH, colW+3, 3);
+      // Base
+      ctx.fillStyle = colSh;
+      ctx.fillRect(cx-colW/2-1, cy-2, colW+2, 2);
+
+      // Fluting lines
+      ctx.strokeStyle = colSh;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(cx-1, cy-colH+3); ctx.lineTo(cx-1, cy-3);
+      ctx.moveTo(cx+1, cy-colH+3); ctx.lineTo(cx+1, cy-3);
+      ctx.stroke();
+    }
+  }
+}
+
+// ── Draw top face of a building level ───────────────────────
+function gkDrawTopFace(ctx, x, y, level) {
+  const TW = GK_TW, TH = GK_TH;
+  const topCols = [
+    [GKC.l1_top_hi, GKC.l1_top_mid, GKC.l1_top_lo],
+    [GKC.l2_top_hi, GKC.l2_top_mid, GKC.l2_top_lo],
+    [GKC.l3_top_hi, GKC.l3_top_mid, GKC.l3_top_lo],
+  ];
+  const [hi, mid, lo] = topCols[level-1] || topCols[2];
+
+  gkDiamond(ctx, x, y, TW, TH);
+  ctx.fillStyle = gkGrad(ctx, x-TW,y, x+TW,y+TH*2,
+    [0, hi], [0.45, mid], [1, lo]);
+  ctx.fill();
+
+  // Courtyard detail: inner platform raised
+  if (level >= 2) {
+    const inset = TW*0.28;
+    ctx.save(); ctx.clip();
+    gkDiamond(ctx, x, y+TH*0.25, TW-inset, TH-inset*0.5);
+    ctx.fillStyle = gkGrad(ctx, x,y+TH*0.25, x,y+TH*1.5,
+      [0, hi], [1, shadeHex(mid,-8)]);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0,0,0,0.1)'; ctx.lineWidth = 0.8; ctx.stroke();
+    ctx.restore();
+  }
+
+  // Edge highlight
+  ctx.strokeStyle = hi; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-TW,y+TH); ctx.stroke();
+  ctx.strokeStyle = 'rgba(0,0,0,0.15)'; ctx.lineWidth = 0.8;
+  ctx.beginPath();
+  ctx.moveTo(x,y); ctx.lineTo(x+TW,y+TH);
+  ctx.moveTo(x,y); ctx.lineTo(x-TW,y+TH);
+  ctx.stroke();
+}
+
+// ── Draw Cycladic dome (blue rooftop) ────────────────────────
+function gkDrawDome(ctx, x, y) {
+  const TW = GK_TW, TH = GK_TH;
+  // Dome sits centered on the top-face diamond.
+  // Top-face center is at (x, y+TH). Dome rises upward from there.
+  const cx = x;
+  const baseY = y + TH; // where dome base meets the tile
+  const rx = TW * 0.58;
+  const ry = TH * 2.2;  // tall enough to look like a proper rooftop
+
+  // Cast shadow on tile top
+  gkDiamond(ctx, x, y, TW, TH);
+  ctx.save(); ctx.clip();
+  ctx.fillStyle = 'rgba(0,0,0,0.12)'; ctx.fill();
+  ctx.restore();
+
+  // Dome back rim (dark underside visible at base)
+  ctx.beginPath();
+  ctx.ellipse(cx, baseY, rx, TH*0.28, 0, 0, Math.PI*2);
+  ctx.fillStyle = GKC.dome_deep;
+  ctx.fill();
+
+  // Main dome body — upper hemisphere, arching upward
+  ctx.beginPath();
+  ctx.ellipse(cx, baseY, rx, ry, 0, Math.PI, 0, false); // upper arc: π → 0 (goes left→top→right)
+  ctx.lineTo(cx + rx, baseY);
+  ctx.lineTo(cx - rx, baseY);
+  ctx.closePath();
+
+  const dg = ctx.createLinearGradient(cx - rx, baseY - ry, cx + rx, baseY);
+  dg.addColorStop(0,   GKC.dome_hi);
+  dg.addColorStop(0.25, GKC.dome_mid);
+  dg.addColorStop(0.6, GKC.dome_dark);
+  dg.addColorStop(1,   GKC.dome_deep);
+  ctx.fillStyle = dg;
+  ctx.fill();
+
+  // Left-face shading (shadow side)
+  ctx.beginPath();
+  ctx.ellipse(cx, baseY, rx, ry, 0, Math.PI, Math.PI*0.5, false);
+  ctx.lineTo(cx, baseY); ctx.closePath();
+  ctx.fillStyle = 'rgba(0,0,30,0.22)'; ctx.fill();
+
+  // Specular highlight — bright patch upper-left
+  ctx.beginPath();
+  ctx.ellipse(cx - rx*0.28, baseY - ry*0.62, rx*0.22, ry*0.13, -0.3, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.fill();
+
+  // Thin secondary highlight streak
+  ctx.beginPath();
+  ctx.ellipse(cx - rx*0.1, baseY - ry*0.82, rx*0.08, ry*0.06, -0.2, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.fill();
+
+  // Rim stripe at base (white terracotta band)
+  ctx.beginPath();
+  ctx.ellipse(cx, baseY, rx, TH*0.28, 0, 0, Math.PI*2);
+  const rimG = gkGrad(ctx, cx-rx, baseY, cx+rx, baseY,
+    [0,'#e8e0d0'],[0.3, GKC.dome_rim],[0.7,'#e8e0d0'],[1,'#c8c0b0']);
+  ctx.fillStyle = rimG;
+  ctx.fill();
+  ctx.strokeStyle = '#a09880'; ctx.lineWidth = 0.8; ctx.stroke();
+
+  // Cross / finial at apex
+  const apexY = baseY - ry - 2;
+  ctx.strokeStyle = '#f0ece0'; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(cx, apexY); ctx.lineTo(cx, apexY - 9); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx-5, apexY-5); ctx.lineTo(cx+5, apexY-5); ctx.stroke();
+  // Finial ball
+  ctx.fillStyle = '#f0e8c0';
+  ctx.beginPath(); ctx.arc(cx, apexY-9, 2.5, 0, Math.PI*2); ctx.fill();
+}
+
+// ── Draw complete cell ────────────────────────────────────────
+function gkDrawCell(ctx, gr, gc, cell, hl, isSel) {
+  const topLevel = cell.dome ? 3 : cell.level;
+  const faceH = GK_LEVEL_H;
+
+  // ── Always draw the ground tile at elev=0 first ──────────
+  const { x: gx, y: gy } = gkToScreen(gr, gc, 0);
+  gkDrawGround(ctx, gx, gy, cell.level === 0 ? hl : null, cell.level === 0 ? isSel : false);
+
+  if (topLevel === 0) {
+    // Worker on ground
+    if (cell.worker) gkDrawWorker(ctx, gx, gy, cell.worker.player, isSel && cell.worker.player === GS.currentPlayer);
+    return;
+  }
+
+  // ── Stack wall faces for each building level ──────────────
+  for (let lv = 1; lv <= topLevel; lv++) {
+    const btmElev = gkCellElev({ level: lv-1 });
+    const { x: wx, y: wy } = gkToScreen(gr, gc, btmElev);
+    gkDrawWalls(ctx, wx, wy, lv, faceH);
+  }
+
+  // ── Top face of highest level ─────────────────────────────
+  const { x, y } = gkToScreen(gr, gc, gkCellElev({ level: topLevel }));
+
+  if (!cell.dome) {
+    gkDrawTopFace(ctx, x, y, cell.level);
+    gkDrawColumns(ctx, x, y, cell.level, faceH * 0.72);
+    if (hl || isSel) {
+      gkDiamond(ctx, x, y, GK_TW, GK_TH);
+      ctx.fillStyle = hl || 'rgba(255,255,100,0.45)';
+      ctx.fill();
+      ctx.strokeStyle = (hl || 'rgba(255,255,100,0.9)').replace(/[\d.]+\)$/, '0.85)');
+      ctx.lineWidth = 2; ctx.stroke();
+    }
+  } else {
+    gkDrawTopFace(ctx, x, y, 3);
+    gkDrawColumns(ctx, x, y, 3, faceH * 0.72);
+    gkDrawDome(ctx, x, y);
+  }
+
+  // ── Worker stands on top surface ─────────────────────────
+  if (cell.worker) gkDrawWorker(ctx, x, y, cell.worker.player, isSel && cell.worker.player === GS.currentPlayer);
+}
+
+// ── Draw Greek statue worker ─────────────────────────────────
+function gkDrawWorker(ctx, x, y, player, selected) {
+  const TW = GK_TW, TH = GK_TH;
+  const wx = Math.round(x);
+  const wy = Math.round(y + TH - 2); // stand on top surface
+
+  const p = player === 'p1'
+    ? { skin: GKC.p1_marble, shadow: GKC.p1_shadow, dark: GKC.p1_dark, tunic: GKC.p1_tunic, tsh: GKC.p1_tsh, trim: GKC.p1_trim }
+    : { skin: GKC.p2_marble, shadow: GKC.p2_shadow, dark: GKC.p2_dark, tunic: GKC.p2_tunic, tsh: GKC.p2_tsh, trim: GKC.p2_trim };
+
+  // Selection ring
+  if (selected) {
+    ctx.strokeStyle = '#f0d060'; ctx.lineWidth = 2.5;
+    ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.ellipse(wx, wy+6, 16, 7, 0, 0, Math.PI*2); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Drop shadow
+  ctx.save();
+  ctx.scale(1, 0.4);
+  ctx.beginPath(); ctx.arc(wx, wy/0.4+12, 12, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fill();
+  ctx.restore();
+
+  // ── Legs / Chiton skirt ──────────────────────────────────
+  ctx.fillStyle = p.tunic;
+  // Skirt trapezoid
+  ctx.beginPath();
+  ctx.moveTo(wx-7, wy-8);
+  ctx.lineTo(wx+7, wy-8);
+  ctx.lineTo(wx+9, wy+4);
+  ctx.lineTo(wx-9, wy+4);
+  ctx.closePath();
+  ctx.fill();
+  // Skirt shading
+  ctx.fillStyle = p.tsh;
+  ctx.beginPath();
+  ctx.moveTo(wx+3, wy-8); ctx.lineTo(wx+7, wy-8); ctx.lineTo(wx+9, wy+4); ctx.lineTo(wx+3, wy+4);
+  ctx.closePath(); ctx.fill();
+  // Hem trim
+  ctx.fillStyle = p.trim;
+  ctx.fillRect(wx-9, wy+2, 18, 2);
+
+  // Sandal feet
+  ctx.fillStyle = p.dark;
+  ctx.beginPath(); ctx.ellipse(wx-5, wy+6, 5, 2.5, 0.2, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(wx+5, wy+6, 5, 2.5, -0.2, 0, Math.PI*2); ctx.fill();
+
+  // ── Torso ────────────────────────────────────────────────
+  // Chiton body
+  ctx.fillStyle = p.tunic;
+  ctx.beginPath();
+  ctx.moveTo(wx-7, wy-22);
+  ctx.lineTo(wx+7, wy-22);
+  ctx.lineTo(wx+8, wy-8);
+  ctx.lineTo(wx-8, wy-8);
+  ctx.closePath(); ctx.fill();
+  // Torso shading
+  ctx.fillStyle = p.tsh;
+  ctx.beginPath();
+  ctx.moveTo(wx+2, wy-22); ctx.lineTo(wx+7, wy-22); ctx.lineTo(wx+8, wy-8); ctx.lineTo(wx+2, wy-8);
+  ctx.closePath(); ctx.fill();
+  // Belt / sash
+  ctx.fillStyle = p.trim;
+  ctx.fillRect(wx-8, wy-11, 16, 3);
+
+  // ── Arms ─────────────────────────────────────────────────
+  // Left arm (holds a small scroll/tool — raised slightly)
+  ctx.strokeStyle = p.skin; ctx.lineWidth = 5; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(wx-7, wy-20); ctx.lineTo(wx-14, wy-14); ctx.stroke();
+  ctx.strokeStyle = p.shadow; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(wx-7, wy-20); ctx.lineTo(wx-14, wy-14); ctx.stroke();
+  // Right arm (pointing forward/working)
+  ctx.strokeStyle = p.skin; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.moveTo(wx+7, wy-20); ctx.lineTo(wx+13, wy-16); ctx.stroke();
+  ctx.strokeStyle = p.shadow; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(wx+7, wy-20); ctx.lineTo(wx+13, wy-16); ctx.stroke();
+
+  // Small tool in right hand (mason's hammer)
+  ctx.fillStyle = p.dark;
+  ctx.fillRect(wx+12, wy-19, 6, 3);
+  ctx.fillStyle = '#a08060';
+  ctx.fillRect(wx+14, wy-16, 2, 5);
+
+  // ── Head ─────────────────────────────────────────────────
+  // Neck
+  ctx.fillStyle = p.skin;
+  ctx.fillRect(wx-3, wy-27, 6, 5);
+  ctx.strokeStyle = p.shadow; ctx.lineWidth = 0.8;
+  ctx.strokeRect(wx-3, wy-27, 6, 5);
+
+  // Head oval
+  const headGrad = gkRadGrad(ctx, wx-2,wy-33, 1, wx,wy-30, 9,
+    [0, shadeHex(p.skin,20)], [0.5, p.skin], [1, p.shadow]);
+  ctx.fillStyle = headGrad;
+  ctx.beginPath(); ctx.ellipse(wx, wy-32, 8, 9, 0, 0, Math.PI*2); ctx.fill();
+  ctx.strokeStyle = p.shadow; ctx.lineWidth = 0.8;
+  ctx.beginPath(); ctx.ellipse(wx, wy-32, 8, 9, 0, 0, Math.PI*2); ctx.stroke();
+
+  // Helmet / wreath crown
+  ctx.fillStyle = p.trim;
+  ctx.beginPath();
+  ctx.moveTo(wx-9, wy-38);
+  ctx.bezierCurveTo(wx-8,wy-44, wx+8,wy-44, wx+9,wy-38);
+  ctx.lineTo(wx+7, wy-39);
+  ctx.bezierCurveTo(wx+6,wy-42, wx-6,wy-42, wx-7,wy-39);
+  ctx.closePath();
+  ctx.fill();
+  // Wreath leaves
+  for (let li = -1; li <= 1; li++) {
+    ctx.fillStyle = '#70a040';
+    ctx.beginPath();
+    ctx.ellipse(wx + li*5, wy-40, 3, 1.5, li*0.5, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // Eyes
+  ctx.fillStyle = '#302010';
+  ctx.beginPath(); ctx.arc(wx-3, wy-33, 1.2, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(wx+3, wy-33, 1.2, 0, Math.PI*2); ctx.fill();
+  // Eye whites
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.beginPath(); ctx.arc(wx-3.3, wy-33.3, 0.6, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(wx+2.7, wy-33.3, 0.6, 0, Math.PI*2); ctx.fill();
+
+  // Nose hint
+  ctx.strokeStyle = p.shadow; ctx.lineWidth = 1; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(wx, wy-32); ctx.lineTo(wx+1, wy-29); ctx.stroke();
+
+  // Mouth (slight smile for winner, neutral otherwise)
+  ctx.strokeStyle = p.dark; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(wx, wy-27, 2, 0.1, Math.PI-0.1); ctx.stroke();
+
+  // Player label badge on tunic
+  ctx.fillStyle = 'rgba(0,0,0,0.35)';
+  ctx.beginPath(); ctx.ellipse(wx, wy-15, 5, 4, 0, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 7px serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(player === 'p1' ? 'I' : 'II', wx, wy-15);
+}
+
+// helper for shade
+function shadeHex(hex, amt) {
+  const r = Math.max(0,Math.min(255, parseInt(hex.slice(1,3),16)+amt));
+  const g = Math.max(0,Math.min(255, parseInt(hex.slice(3,5),16)+amt));
+  const b = Math.max(0,Math.min(255, parseInt(hex.slice(5,7),16)+amt));
+  return `rgb(${r},${g},${b})`;
+}
+
+// ── Environment: sky, sea, distant hills ─────────────────────
+function gkDrawBackground(ctx, W, H) {
+  // ── Sky gradient ─────────────────────────────────────────
+  const sky = gkGrad(ctx, 0,0, 0,H*0.52,
+    [0,'#3a8cc8'],[0.35,'#6ab4e0'],[0.7,'#a8d8f0'],[1,'#cce8f8']);
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H);
+
+  // ── Sun with rays ─────────────────────────────────────────
+  const sunX = W*0.80, sunY = H*0.10;
+  // Ray glow
+  const sunGlow = gkRadGrad(ctx, sunX,sunY,0, sunX,sunY,80,
+    [0,'rgba(255,240,160,0.7)'],[0.4,'rgba(255,210,80,0.25)'],[1,'rgba(255,180,0,0)']);
+  ctx.fillStyle = sunGlow;
+  ctx.beginPath(); ctx.arc(sunX,sunY,80,0,Math.PI*2); ctx.fill();
+  // Sun disc
+  ctx.fillStyle = '#fff8c0';
+  ctx.beginPath(); ctx.arc(sunX,sunY,14,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#ffe860';
+  ctx.beginPath(); ctx.arc(sunX,sunY,10,0,Math.PI*2); ctx.fill();
+  // Rays
+  ctx.strokeStyle = 'rgba(255,240,120,0.4)'; ctx.lineWidth = 1.5; ctx.lineCap = 'round';
+  for (let a = 0; a < Math.PI*2; a += Math.PI/6) {
+    ctx.beginPath();
+    ctx.moveTo(sunX+Math.cos(a)*16, sunY+Math.sin(a)*16);
+    ctx.lineTo(sunX+Math.cos(a)*28, sunY+Math.sin(a)*28);
+    ctx.stroke();
+  }
+
+  // ── Clouds ───────────────────────────────────────────────
+  function drawCloud(cx, cy, scale) {
+    ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    const puffs = [{x:0,y:0,r:14},{x:18,y:4,r:18},{x:38,y:2,r:14},{x:54,y:6,r:12},
+                   {x:12,y:-8,r:12},{x:30,y:-10,r:15},{x:48,y:-6,r:11}];
+    puffs.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(cx+p.x*scale, cy+p.y*scale, p.r*scale, 0, Math.PI*2);
+      ctx.fill();
+    });
+    // Underside shadow
+    ctx.fillStyle = 'rgba(160,190,220,0.35)';
+    [{x:6,r:12},{x:22,r:16},{x:40,r:12},{x:54,r:10}].forEach(p => {
+      ctx.beginPath(); ctx.arc(cx+p.x*scale, cy+9*scale, p.r*scale*0.6, 0, Math.PI*2); ctx.fill();
+    });
+  }
+  drawCloud(W*0.05, H*0.07, 0.9);
+  drawCloud(W*0.30, H*0.04, 1.1);
+  drawCloud(W*0.55, H*0.09, 0.75);
+  drawCloud(W*0.72, H*0.18, 0.6);
+
+  // ── Distant island cliffs / coastline ─────────────────────
+  const horizonY = H*0.42;
+
+  // Far island — pale blue-grey
+  ctx.fillStyle = '#b8c8d4';
+  ctx.beginPath();
+  ctx.moveTo(W*0.0, horizonY);
+  ctx.bezierCurveTo(W*0.05,H*0.30, W*0.12,H*0.28, W*0.20,H*0.31);
+  ctx.bezierCurveTo(W*0.27,H*0.29, W*0.30,H*0.33, W*0.34,horizonY);
+  ctx.closePath(); ctx.fill();
+
+  // Mid island — slightly greener
+  ctx.fillStyle = '#9ab8a0';
+  ctx.beginPath();
+  ctx.moveTo(W*0.42, horizonY);
+  ctx.bezierCurveTo(W*0.44,H*0.31, W*0.52,H*0.27, W*0.60,H*0.30);
+  ctx.bezierCurveTo(W*0.68,H*0.28, W*0.74,H*0.33, W*0.78,horizonY);
+  ctx.closePath(); ctx.fill();
+
+  // White village buildings on mid island (tiny whitewashed cubes)
+  ctx.fillStyle = '#f0ece0';
+  for (let bx = W*0.48; bx < W*0.70; bx += W*0.025) {
+    const bh = H*0.018 + Math.sin(bx*7)*H*0.008;
+    const by = H*0.295 - bh;
+    ctx.fillRect(bx, by, W*0.018, bh);
+    // Tiny blue dome on some buildings
+    if (Math.sin(bx*13) > 0.4) {
+      ctx.fillStyle = '#4898c8';
+      ctx.beginPath();
+      ctx.arc(bx+W*0.009, by, W*0.009, Math.PI, 0, false);
+      ctx.fill();
+      ctx.fillStyle = '#f0ece0';
+    }
+  }
+
+  // Right island / cape
+  ctx.fillStyle = '#a8b8a0';
+  ctx.beginPath();
+  ctx.moveTo(W*0.84, horizonY);
+  ctx.bezierCurveTo(W*0.86,H*0.32, W*0.93,H*0.29, W*1.0,H*0.31);
+  ctx.lineTo(W,horizonY); ctx.closePath(); ctx.fill();
+
+  // Cypress trees on left coastline
+  function drawCypress(cx, cy, h) {
+    ctx.fillStyle = '#2a5a30';
+    ctx.beginPath();
+    ctx.moveTo(cx, cy-h);
+    ctx.bezierCurveTo(cx-h*0.18, cy-h*0.55, cx-h*0.14, cy-h*0.1, cx, cy);
+    ctx.bezierCurveTo(cx+h*0.14, cy-h*0.1, cx+h*0.18, cy-h*0.55, cx, cy-h);
+    ctx.fill();
+    // Highlight streak
+    ctx.fillStyle = '#3a7a42';
+    ctx.beginPath();
+    ctx.moveTo(cx, cy-h); ctx.lineTo(cx+h*0.05, cy-h*0.4); ctx.lineTo(cx, cy-h*0.15);
+    ctx.fill();
+  }
+  drawCypress(W*0.08, H*0.38, H*0.065);
+  drawCypress(W*0.12, H*0.395, H*0.055);
+  drawCypress(W*0.155, H*0.385, H*0.06);
+  drawCypress(W*0.87, H*0.38, H*0.05);
+  drawCypress(W*0.91, H*0.39, H*0.06);
+
+  // Horizon haze
+  ctx.fillStyle = 'rgba(200,230,248,0.4)';
+  ctx.fillRect(0, horizonY-4, W, 8);
+
+  // ── Sea ───────────────────────────────────────────────────
+  const sea = gkGrad(ctx, 0,horizonY, 0,H,
+    [0,'#5aacd8'],[0.2,'#3888c0'],[0.6,'#1c60a0'],[1,'#0a3870']);
+  ctx.fillStyle = sea; ctx.fillRect(0, horizonY, W, H-horizonY);
+
+  // Sea wave shimmer
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.lineWidth = 1;
+  for (let sy = horizonY+6; sy < H*0.62; sy += 7) {
+    const waveAmp = (sy - horizonY) * 0.015;
+    ctx.beginPath(); ctx.moveTo(0, sy);
+    for (let sx = 0; sx < W; sx += 16) {
+      ctx.lineTo(sx+8,  sy + Math.sin(sx*0.18 + sy*0.05)*waveAmp);
+      ctx.lineTo(sx+16, sy);
+    }
+    ctx.stroke();
+  }
+  // Sunlight sparkle path on water
+  const sparkle = gkGrad(ctx, sunX-30, horizonY+5, sunX+30, H*0.58,
+    [0,'rgba(255,240,160,0)'],[0.3,'rgba(255,240,120,0.22)'],[0.7,'rgba(255,220,80,0.12)'],[1,'rgba(255,200,0,0)']);
+  ctx.fillStyle = sparkle;
+  ctx.fillRect(sunX-50, horizonY, 100, H*0.2);
+
+  // ── Rocky ground platform the board sits on ───────────────
+  const groundY = H*0.50;
+  // Main ground fill
+  const gndG = gkGrad(ctx, 0,groundY, 0,H,
+    [0,'#d4c090'],[0.15,'#c4b080'],[0.5,'#b09060'],[1,'#806840']);
+  ctx.fillStyle = gndG; ctx.fillRect(0, groundY, W, H-groundY);
+
+  // Ground texture — subtle horizontal rock strata
+  ctx.strokeStyle = 'rgba(0,0,0,0.07)'; ctx.lineWidth = 1;
+  for (let gy = groundY+6; gy < H; gy += 10) {
+    ctx.beginPath(); ctx.moveTo(0, gy);
+    for (let gx = 0; gx < W; gx += 30) {
+      ctx.lineTo(gx+15, gy + Math.sin(gx*0.12)*1.5);
+      ctx.lineTo(gx+30, gy);
+    }
+    ctx.stroke();
+  }
+  // Small pebble dots
+  ctx.fillStyle = 'rgba(160,140,100,0.4)';
+  for (let pi = 0; pi < 30; pi++) {
+    const px = (pi * W * 0.037) % W;
+    const py = groundY + 8 + (pi * 11) % 22;
+    ctx.beginPath(); ctx.arc(px, py, 1.5+Math.sin(pi)*1, 0, Math.PI*2); ctx.fill();
+  }
+
+  // Ground-sea edge: thin sandy beach line
+  ctx.fillStyle = '#e8d8a8';
+  ctx.fillRect(0, horizonY-1, W, 5);
+
+  // ── Edge vignette ─────────────────────────────────────────
+  const vig = ctx.createRadialGradient(W/2,H*0.5,H*0.2, W/2,H*0.5,H*0.75);
+  vig.addColorStop(0,'transparent'); vig.addColorStop(1,'rgba(0,0,0,0.30)');
+  ctx.fillStyle = vig; ctx.fillRect(0,0,W,H);
+}
+
+// ── Main render loop ──────────────────────────────────────────
+function gkRenderFrame(ts) {
+  gkFlashT = ts || 0;
+  const ctx = gkCtx;
+  const W = gkLogW, H = gkLogH;
+
+  ctx.clearRect(0,0,W,H);
+  gkDrawBackground(ctx, W, H);
+
+  const flash = Math.sin(gkFlashT*0.003)*0.5+0.5;
+  const hlMap = {};
+  GS.highlightCells.forEach(({r,c,type}) => {
+    const [rc,gc,bc] = GKC['hl_'+type] || [255,220,80];
+    hlMap[`${r},${c}`] = `rgba(${rc},${gc},${bc},${0.28+flash*0.28})`;
+  });
+
+  gkPaintOrder().forEach(([gr,gc]) => {
+    const cell = GS.board[gr][gc];
+    const hl = hlMap[`${gr},${gc}`] || null;
+    let isSel = false;
+    if (GS.selectedWorker !== null) {
+      const w = GS.workers[GS.currentPlayer][GS.selectedWorker];
+      if (w && w.r===gr && w.c===gc) isSel=true;
+    }
+    gkDrawCell(ctx, gr, gc, cell, hl, isSel);
+  });
+
+  gkAnimFrame = requestAnimationFrame(gkRenderFrame);
+}
+
+// ── Init & new game ───────────────────────────────────────────
+function gkInit() {
+  if (gkAnimFrame) { cancelAnimationFrame(gkAnimFrame); gkAnimFrame = null; }
+  const canvas = document.getElementById('gk-c');
+  gkLogW = GRID5 * GK_TW * 2 + 200;
+  gkLogH = GRID5 * GK_TH * 2 + 220;
+  canvas.width  = gkLogW;
+  canvas.height = gkLogH;
+  canvas.style.width  = Math.min(gkLogW, window.innerWidth - 20) + 'px';
+  canvas.style.height = 'auto';
+  gkCtx = canvas.getContext('2d');
+  gkCtx.imageSmoothingEnabled = true;
+  gkCtx.imageSmoothingQuality = 'high';
+
+  canvas.onclick = e => {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = gkLogW / rect.width;
+    const scaleY = gkLogH / rect.height;
+    const mx = (e.clientX - rect.left) * scaleX;
+    const my = (e.clientY - rect.top)  * scaleY;
+    const hit = gkScreenToCell(mx, my);
+    if (hit) gkOnCell(hit[0], hit[1]);
+  };
+
+  canvas.addEventListener('touchend', e => {
+    e.preventDefault();
+    const t = e.changedTouches[0];
+    const rect = canvas.getBoundingClientRect();
+    const mx = (t.clientX - rect.left) * (gkLogW / rect.width);
+    const my = (t.clientY - rect.top)  * (gkLogH / rect.height);
+    const hit = gkScreenToCell(mx, my);
+    if (hit) gkOnCell(hit[0], hit[1]);
+  }, { passive: false });
+
+  gkAnimFrame = requestAnimationFrame(gkRenderFrame);
+}
+
+function gkNewGame() {
+  document.getElementById('gk-win-overlay').classList.remove('show');
+  GS = makeState();
+  gkUpdateUI();
+}
+
+function gkCancelSel() {
+  if (GS.phase === 'move') {
+    GS.phase = 'select'; GS.selectedWorker = null; GS.highlightCells = [];
+    gkUpdateUI();
+  }
+}
+
+function gkOnCell(r, c) {
+  let result = false;
+  if (GS.phase === 'place')  result = handlePlace(GS, r, c) ? 'continue' : false;
+  if (GS.phase === 'select') result = handleSelect(GS, r, c);
+  if (GS.phase === 'move')   result = handleMove(GS, r, c);
+  if (GS.phase === 'build')  result = handleBuild(GS, r, c);
+  if (result === 'win') {
+    gkUpdateUI();
+    setTimeout(() => gkShowWin(GS.currentPlayer), 200);
+    return;
+  }
+  if (result) gkUpdateUI();
+}
+
+function gkShowWin(p) {
+  document.getElementById('gk-win-title').textContent = 'VICTORY';
+  document.getElementById('gk-win-sub').textContent =
+    `${p==='p1'?'Player I':'Player II'} has ascended to glory!`;
+  document.getElementById('gk-win-overlay').classList.add('show');
+}
+
+function gkUpdateUI() {
+  const p1A = GS.currentPlayer === 'p1';
+  document.getElementById('gk-panel-p1').className = 'gk-player-panel'+(p1A?' active-p1':'');
+  document.getElementById('gk-panel-p2').className = 'gk-player-panel'+(!p1A?' active-p2':'');
+  ['p1','p2'].forEach(p => [0,1].forEach(i => {
+    document.getElementById(`gk-pip-${p}-${i}`).classList.toggle('filled', GS.workers[p][i]!==null);
+  }));
+  const pName = GS.currentPlayer==='p1'?'Player I':'Player II';
+  const phases = {
+    place:  ['PLACE WORKERS', `${pName} — click a tile`],
+    select: ['SELECT WORKER', `${pName} — choose a worker`],
+    move:   ['MOVE',          `${pName} — move to highlighted tile`],
+    build:  ['BUILD',         `${pName} — choose where to build`],
+  };
+  document.getElementById('gk-phase-main').textContent = phases[GS.phase][0];
+  document.getElementById('gk-phase-hint').textContent = phases[GS.phase][1];
+  document.getElementById('gk-btn-cancel').style.display = GS.phase==='move'?'inline-block':'none';
 }
 
 // ─── Boot ────────────────────────────────────────────────────
